@@ -8,13 +8,13 @@ Here is what you need to start playing the game.
 
 ### Prerequisites
 
-- Because we use ES6 modules and due to CORS policy the game can't be run directly from the file.
-
 - [Python3](https://www.python.org/downloads/) can be used to run a quick local server (see below) or you can use any other method you'd prefer.
 
 ### Setup
 
-- Clone this repo
+Because we use ES6 modules and due to CORS policy the game can't be run directly from the file.
+
+- Clone this repo :smile:
 
 `git clone https://github.com/carloseam/u-just-jump.git`
 

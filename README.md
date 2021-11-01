@@ -108,7 +108,10 @@ const mapName = `
 
 ## Authors
 
-- [Carlos E Alford M](https://carlosealford.com) - website implementation and code customization.
+Website implementation and code customization.
+
+- Website - [Carlos E Alford M](https://carlosealford.com)
+- Twitter - [@webshuriken](https://www.twitter.com/webshuriken)
 
 ## License
 

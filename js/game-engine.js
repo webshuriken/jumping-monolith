@@ -1,5 +1,8 @@
 /**
- * U Just Jump - Browser game
+ * Jumping Monolith - Browser game
+ * created: 2020
+ * updated: 2026
+ * author: Carlos E Alford
  */
 
 // Load the module with the game maps

@@ -2,27 +2,33 @@
 
 Browser based platform game, where player is a monolith jumping around collecting coins while avoiding the lava and crushing enemies.
 
-## Getting Started
+## About
 
-Here is what you need to start playing the game.
+As part of my journey to stay ahead and from curiosity I read a book called _Eloquent JavaScript_ by _Marijn Haverbeke_ which goes through concepts in a clear way with examples and questions to test what you have learned. I really enjoyed it.
 
-### Prerequisites
+One of the chapters spoke about creating a game engine with code examples to create a simple game. It was a block that moved around avoiding obstacles. It was so good that it wet my curiosities appetite and I decided to take it further.
 
-- [Python3](https://www.python.org/downloads/) can be used to run a quick local server (see below) or you can use any other method you'd prefer.
+The current engine is combination of the code from the tutorial and my own. It will keep evolving and improving.
+This version of the game uses the DOM to draw out the game, therefore it may not perform games console smooth.
 
-### Setup
+## Play the game
 
-Because we use ES6 modules and due to CORS policy the game can't be run directly from the file.
+Go to [game](https://webshuriken.github.io/jumping-monolith/).
 
-- Clone this repo :smile:
+## Built with
 
-`git clone https://github.com/webshuriken/jumping-monolith.git`
+- HTML
+- CSS
+- JS (ES6)
+- Currently the game does not support touch screen devices.
 
-- Now go into the folder and run:
+## Test locally
 
-`python3 -m http.server 8888`
+Because we use `ES6` modules and due to CORS policy the game can't be run directly from the file.
 
-`8888` is just the port number I use but you can use any port number you like.
+- VS Code: Install the Live Server extension. Once installed, clicke ont he "Go Live" button at the bottom of the editor.
+- Python: If you have Python installed, run this in your project folder: `python -m http.server`
+- Node.js: If you prefer Node, run `npx serve`
 
 ## How to Play
 
@@ -42,76 +48,15 @@ Because we use ES6 modules and due to CORS policy the game can't be run directly
 
 Right now there is only 1 level available. I am currently designing a few more levels. :smiley:
 
-If you have any levels you want to add please see [Contributing](#contributing).
-
-## Built with
-
-- HTML
-- CSS
-- JS (ES6)
-
 ## Contributing
 
-Pull request are welcomed.
-
-- Fork the repo
-- Clone locally or not
-- Make your changes
-- Make a pull request
-
-I will be maintaining this product on my own so please allow a couple of days for a reply.
-
-### Creating maps
-
-The map is made from a string. This keeps it simple and easily readable.
-
-Use the following characters to create the map:
-- `#` for walls and floors
-- `.` full stops are black spaces
-- `@` player
-- `*` enemy (horizontally moving)
-- `o` the letter o are the coins
-- Lava consists of 4 different characters depending on the desired effect:
-  - `+` sitting still lava block
-  - `=` moving back and forth horizontally in a loop
-  - `|` moving up and down in a loop
-  - `v` dripping lava, once it hits the the floor it starts falling again
-
-**Map Example**
-
-```javascript
-const mapName = `
-....................|...................
-.#.............|.........|............#.
-.#....................................#.
-.#....................................#.
-.#........................o.o.o.o.....#.
-.#.o....=..############################.
-.###.........................v......o.#.
-.#....................................#.
-.#.o.o.#............o...............o.#.
-.#..............................#######.
-.#..........######..................o.#.
-.#o.................................o.#.
-.##.......................#############.
-.#....o.........#..*...@.#..............
-.#....##++++#############...............
-.#####################..................
-........................................`;
-```
-
-## Notes
-
-- Currently the game does not support touch screen devices.
-
-- This version of the game uses the DOM to draw out the game, therefore it may not perform games console smooth.
+If you have any levels you want to add please see [Contributing](CONTRIBUTING.md).
 
 ## Authors
 
 Website implementation and code customization.
 
-- Website - [Carlos E Alford M](https://carlosealford.com)
-- Twitter - [@webshuriken](https://www.twitter.com/webshuriken)
+- [Carlos E Alford M](https://carlosealford.com) (webshuriken)
 
 ## License
 
@@ -119,6 +64,4 @@ Website implementation and code customization.
 
 ## Acknowledgements
 
-Thanks to [Eloquent JavaScript](https://eloquentjavascript.net/) written by Marijn Haverbeke.
-The challenges presented in the book were worth the time.
-The base engine for the game comes from chapter 16: A Platform Game.
+Thanks to [Eloquent JavaScript](https://eloquentjavascript.net/) written by Marijn Haverbeke. The base engine for the game comes from chapter 16: A Platform Game.

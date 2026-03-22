@@ -32,16 +32,11 @@ Because we use `ES6` modules and due to CORS policy the game can't be run direct
 
 ## How to Play
 
-- The game has one simple goal: **collect all the coins**.
-
-- Use the **left** :arrow_left: and **right** :arrow_right: *arrow keys* to **move**
-
-- Use the **up** :arrow_up: *arrow key* to **jump**
-
+- The game has one simple goal: `collect all the coins`.
+- Use the `left` arrow-key and `right` arrow-key to `move`
+- Use the `up` arrow-key to `jump`
 - Don't let the lava touch you or the level will restart.
-
 - Enemies will take a live and restart a level when they touch you.
-
 - Land on top of the enemy to destry them!
 
 **NOTE:**

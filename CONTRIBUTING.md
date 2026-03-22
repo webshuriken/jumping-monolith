@@ -58,7 +58,7 @@ const levelBlueprint = {
   name: 'level_name',
   date: 'date_of_creation',
   author: 'your_name',
-  map: 'map_name'
+  map: ''
 }
 
 const map = `

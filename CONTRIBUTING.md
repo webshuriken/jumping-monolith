@@ -55,10 +55,10 @@ Use the code for your file and edit the parts that make your level unique.
 
 ```javascript
 const levelBlueprint = {
-  name: level_name,
-  date: date_of_creation,
-  author: your_name,
-  map: ''
+  name: 'level_name',
+  date: 'date_of_creation',
+  author: 'your_name',
+  map: 'map_name'
 }
 
 const map = `
@@ -82,5 +82,5 @@ const map = `
 
 levelBlueprint.map = map;
 
-export levelBlueprint;
+export {levelBlueprint};
 ```

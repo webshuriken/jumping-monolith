@@ -47,6 +47,29 @@ Right now there is only 1 level available. I am currently designing a few more l
 
 If you have any levels you want to add please see [Contributing](CONTRIBUTING.md).
 
+## Features
+
+- lava obstacles that move up and down
+- enemies moves horizontally
+- player can destroy enemies by jumping on top of them
+- limited number of level retries
+
+## Road map
+
+These are the features or ideas to be implemented in due course.
+
+- [ ] Improve `How to Play` screen
+- [ ] Player can do a smaller jump with a quick press of the up arrow-key
+- [ ] Enemies that move up and down
+- [ ] Track and display score of coins collected
+- [ ] Display time taken to complete the level
+- [ ] Improve animation for Lava
+- [ ] Improve animation for Enemy
+- [ ] User can select levels
+- [ ] Levels are played until the end from selected level
+- [ ] Allow player to crouch, becoming a single pixel block
+- [ ] Support for touch screen devices
+
 ## Authors
 
 Website implementation and code customization.

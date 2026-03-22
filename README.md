@@ -1,6 +1,6 @@
-# U Just Jump :video_game:
+# Jumping Monolith :video_game:
 
-Browser based platform game, where the player runs and jumps around collecting coins while avoiding the lava and moving enemies.
+Browser based platform game, where player is a monolith jumping around collecting coins while avoiding the lava and crushing enemies.
 
 ## Getting Started
 
@@ -16,7 +16,7 @@ Because we use ES6 modules and due to CORS policy the game can't be run directly
 
 - Clone this repo :smile:
 
-`git clone https://github.com/carloseam/u-just-jump.git`
+`git clone https://github.com/webshuriken/jumping-monolith.git`
 
 - Now go into the folder and run:
 
@@ -79,7 +79,7 @@ Use the following characters to create the map:
 
 **Map Example**
 
-```
+```javascript
 const mapName = `
 ....................|...................
 .#.............|.........|............#.

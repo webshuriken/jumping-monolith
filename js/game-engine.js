@@ -3,7 +3,7 @@
  */
 
 // Load the module with the game maps
-import {GAME_LEVELS} from './game-levels.js';
+import {GAME_LEVELS} from './main-barrel.js';
 
 /**
  * @description Stores a level object

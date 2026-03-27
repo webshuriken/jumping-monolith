@@ -3,10 +3,20 @@
  * created: 2020
  * updated: 2026
  * author: Carlos E Alford
+ * IMPROVEMENTS:
+ * - Each class should live in its own file. Separates the concerns and the engine only focuses on running the game.
+ * - Tests:
+ *  - for level MAPS:
+ *    - map is construction only using valid characters
+ *    - map Enemies and Coin can only move within valid areas, not through wall, unless its an intented features
+ * 
  */
 
 // Load the module with the game maps
-import {GAME_LEVELS} from './main-barrel.js';
+import { GAME_LEVELS } from './main-barrel.js';
+
+// Utilities
+import { Vec } from './utilities.js';
 
 /**
  * @description Stores a level object
@@ -32,10 +42,10 @@ class Level {
       // Map through each item, row by row
       return row.map((ch, x) => {
 
-        // map current character to background or actor
+        // map current character to background(string) or actor(object)
         let type = levelChars[ch];
         // return the background
-        if (typeof type == "string") return type;
+        if (typeof type === "string") return type;
 
         // create actor object and add to list
         this.startActors.push(type.create(new Vec(x, y), ch));
@@ -72,34 +82,6 @@ class State {
     return this.actors.find(a => a.type == "player");
   }
 }
-
-
-/**
- * @description For 2 dimentional values
- * @param {integer} x - actors top-left x position
- * @param {integer} y - actors top-left y position
- */
-class Vec {
-  // Different types of actors get their own classes since
-  // their behaviour is different.
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-
-  // Represent the current position and state of a given moving element in our game.
-  plus(other) {
-    return new Vec(this.x + other.x, this.y + other.y);
-  }
-
-  // Scales a vector by a given number.
-  // to multiply a speed vector by a time interval to get the
-  // distance traveled during that time.
-  times(factor) {
-    return new Vec(this.x * factor, this.y * factor);
-  }
-}
-
 
 /* === ACTORS ==
 

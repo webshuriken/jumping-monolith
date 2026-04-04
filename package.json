@@ -26,6 +26,7 @@
   "author": "Carlos E Alford",
   "license": "SEE LICENSE IN LICENSE.md",
   "devDependencies": {
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "vite": "^8.0.3"
   }
 }

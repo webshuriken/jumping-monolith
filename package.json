@@ -24,5 +24,8 @@
     "typescript"
   ],
   "author": "Carlos E Alford",
-  "license": "SEE LICENSE IN LICENSE.md"
+  "license": "SEE LICENSE IN LICENSE.md",
+  "devDependencies": {
+    "typescript": "^6.0.2"
+  }
 }

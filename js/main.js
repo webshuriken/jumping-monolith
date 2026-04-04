@@ -1,3 +1,11 @@
+/**
+ * Jumping Monolith - Browser game
+ * created: 2020
+ * updated: 2026
+ * author: Carlos E Alford
+ * IMPROVEMENTS:
+ * - update any element id selector to use getElementById instead of querySelector
+ */
 // load function from game engine to start game
 import {loadGame} from './game-engine.js';
 

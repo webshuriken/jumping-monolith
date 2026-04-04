@@ -1,0 +1,28 @@
+{
+  "name": "jumping-monolith",
+  "version": "1.0.0",
+  "description": "Browser based platform game, where player is a monolisth jumping around collecting coins while avoiding the lava and crushing enemies",
+  "main": "main.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github-work:webshuriken/jumping-monolith.git"
+  },
+  "keywords": [
+    "platform",
+    "game",
+    "monolith",
+    "jumping",
+    "javascript",
+    "pure",
+    "html",
+    "typescript"
+  ],
+  "author": "Carlos E Alford",
+  "license": "SEE LICENSE IN LICENSE.md"
+}

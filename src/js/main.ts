@@ -1,7 +1,7 @@
 /**
  * Jumping Monolith - Browser game
  * created: 2020
- * updated: april - 2026
+ * updated: 05-04-2026
  * author: Carlos E Alford
  * IMPROVEMENTS:
  */
@@ -23,34 +23,36 @@ if (howToModal instanceof HTMLDialogElement) {
   console.error('The element is not a dialog');
 }
 
-
 /**
- * @description Start game
- * @param {object} gameWrapper - DOM element
- * @param {object} startBtn - DOM element
+ * Lauches the game when the start button is pressed
+ * @param {HTMLDivElement} gameWrapper - html div element
+ * @param {HTMLButtonElement} startButton - html button element
  */
-const startGame = (gameWrapper, startBtn) => {
-  // disable start button
-  startBtn.setAttribute('disabled', 'disabled');
+function startGame(gameWrapper: HTMLDivElement, startButton: HTMLButtonElement) {
+  // disable start button to avoid multiple presses
+  startButton.setAttribute('disabled', 'disabled');
+
+  // call a promise that will re-enable the play button when resolved (game finished)
   loadGame(gameWrapper).then(() => {
     // enable start button
-    startBtn.removeAttribute('disabled');
+    startButton.removeAttribute('disabled');
   });
 }
 
-
 /**
- * @description Initialize site settings
+ * Initialize site settings
  */
-const initSettings = () => {
-  // Get DOM elements outside Modules
-  const startBtn = document.querySelector('#startBtn');
-  let gameWrapper = document.querySelector('.game-wrapper');
+function initSettings() {
+  // lets grab the Play game button and the div that will host the game
+  const startButton = document.querySelector<HTMLButtonElement>('#startBtn');
+  const gameWrapper = document.querySelector<HTMLDivElement>('#gameWrapper');
 
-  // Listener for the start button
-  startBtn.addEventListener('click', () => {
-    startGame(gameWrapper, startBtn);
-  });
+  // only load the game setting if HTML is ready for it
+  if (startButton && gameWrapper) {
+    startButton.addEventListener('click', (e) => {
+      startGame(gameWrapper, startButton);
+    });
+  }
 }
 
 // make sure all resources have finished loading before running anything

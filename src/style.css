@@ -77,15 +77,37 @@ header {
   flex-grow: 1;
 }
 
-.main-menu ul li a {
+.main-menu ul li button {
+  position: relative;
+  border: none;
+  padding: .6rem;
+  background: none;
   font-size: .9em;
-  animation: font .23s;
+  z-index: 40;
+}
+.main-menu ul li button::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: #097f43;
+  opacity: 0;
+  transition: opacity .32s;
+  z-index: -1;
+}
+.main-menu ul li button:hover {
+  cursor: pointer;
+}
+.main-menu ul li button:hover::before {
+  opacity: .6;
 }
 
 
 /*BODY*/
 main {
-  background: #333;
+  background: #333333;
   height: 80%;
 }
 
@@ -198,16 +220,13 @@ footer {
 
 /*HOW TO PLAY MODAL*/
 .ht-modal {
-  background-color: rgb(9, 127, 67);
+  background: none;
+  border: none;
+  padding: 0;
+
+}
+.ht-modal::backdrop {
   background-color: rgba(9, 127, 67,.6);
-  display: none;
-  height: 100%;
-  left: 0;
-  overflow: auto;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 66;
 }
 
 .ht-modal-content {
@@ -218,14 +237,17 @@ footer {
   padding: 20px 10px;
   position: relative;
   width: 88%;
+  box-shadow: 0 0 16px rgba(51,51,51,.5);
 }
 
 .close-modal-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
   font-size: 28px;
   font-weight: bold;
-  position: absolute;
-  top: 0;
-  right: 12px;
 }
 
 .close-modal-btn:hover,
@@ -254,7 +276,7 @@ footer {
 
 /*MEDIA QUERIES*/
 @media (min-width: 600px) {
-  .main-menu ul li a {
+  .main-menu ul li button {
     font-size: 1em;
   }
 }

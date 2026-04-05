@@ -1,32 +1,26 @@
 /**
  * Jumping Monolith - Browser game
  * created: 2020
- * updated: 2026
+ * updated: april - 2026
  * author: Carlos E Alford
  * IMPROVEMENTS:
- * - update any element id selector to use getElementById instead of querySelector
  */
 // load function from game engine to start game
 import {loadGame} from './game-engine.js';
 
 
-/**
- * @description Initialise MODAL how to play.
- */
-const initModal = () => {
-  let modal = document.querySelector('#howToModal');
-  // Open modal
-  document.querySelector('#openModalBtn').addEventListener('click', () => {
-    modal.style.display = 'block';
+// allows modal to be closed by clicking on the dialog backdrop
+const howToModal = document.querySelector<HTMLDialogElement>('#howToModal');
+
+// only will work if we are using the correct html element '<dialog></dialog>'
+if (howToModal instanceof HTMLDialogElement) {
+  howToModal.addEventListener('click', (e) => {
+    if (e.target === howToModal) {
+      howToModal.close();
+    }
   });
-  // Close modal
-  document.querySelector('.close-modal-btn').addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
-  // Close modal when user clicks outside of modal
-  window.addEventListener('click', (event) => {
-    if (event.target == modal) modal.style.display = 'none';
-  });
+}else{
+  console.error('The element is not a dialog');
 }
 
 
@@ -59,8 +53,7 @@ const initSettings = () => {
   });
 }
 
-
-window.onload = () => {
-  initModal();
+// make sure all resources have finished loading before running anything
+window.addEventListener('load', () => {
   initSettings();
-}
+});

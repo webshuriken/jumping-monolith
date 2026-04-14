@@ -1,63 +1,80 @@
 /**
  * Jumping Monolith - Game Utilities
  * created: 2026
- * updated: 2026
+ * updated: 05-04-2026
  * author: Carlos E Alford
  * utility: State, to maintain game state for the 2 dimentional values
  * improvements:
  */
 
-import { overlap } from './util-functions.js'
+import { overlap } from './util-functions'
+import { type TActorInstances, type ILevel } from "./level";
+import { type IPlayer } from '../actors/player';
 
-/**
- * @description Track the state of a running game.
- * @param {array} level - human readable level
- * @param {object} plan - game actors
- * @param {string} status - either lost or won
- */
-class State {
-  // This is a persistent data structure.
-  constructor(level, actors, status) {
-    this.level = level;
-    this.actors = actors;
-    // will change when the game has ended
-    this.status = status;
-  }
 
-  // Creates a new state and leaves the old one intact.
-  static start(level) {
-    return new State(level, level.startActors, "playing");
-  }
-
-  // Return a player
-  get player() {
-    return this.actors.find(a => a.type == "player");
-  }
+export type TArrowKeys = "ArrowLeft" | "ArrowRight" | "ArrowUp";
+export type TTrackKeys = Partial<Record<TArrowKeys, boolean>> & { unregister: () => void };
+export type TGameStatus = 'playing' | 'won' | 'lost';
+export interface IState {
+  actors: TActorInstances[];
+  level: ILevel;
+  readonly player: IPlayer;
+  status: TGameStatus;
+  update(time: number, keys: TTrackKeys): IState;
 }
 
 /**
- * @description Update a grid element of a given type
- * @param {integer} time - element position
- * @param {integer} keys - size of element
- * @return {object}
+ * Track the state of a running game.
+ * @param {ILevel} level - human readable level
+ * @param {TActorInstances[]} actors - game actors
+ * @param {TGameStatus} status - either lost or won
  */
-State.prototype.update = function(time, keys) {
-  let actors = this.actors.map(actor => actor.update(time, this, keys));
-  let newState = new State(this.level, actors, this.status);
+class State implements IState {
+  // This is a persistent data structure.
+  constructor(public level: ILevel, public actors: TActorInstances[], public status: TGameStatus) {}
 
-  if (newState.status != "playing") return newState;
-
-  let player = newState.player;
-  if (this.level.touches(player.pos, player.size, "lava")) {
-    return new State(this.level, actors, "lost");
+  // Creates a new state and leaves the old one intact.
+  static start(level: ILevel) {
+    return new State(level, level.startActors, "playing");
   }
 
-  for (let actor of actors) {
-    if (actor != player && overlap(actor, player)) {
-      newState = actor.collide(newState);
+  /**
+   * @ return {TActor} actor object, eg Player, Coin, Lava, Enemy
+   */
+  get player(): IPlayer { 
+    const player = this.actors.find(a => a.type === "player");
+    if (!player) {
+      throw new Error('State invariant violated: no player actor in state.');
     }
+    return player;
   }
-  return newState;
+
+  /**
+   * Update a grid element of a given type
+   * @param {number} time - element position
+   * @param { TTrackKeys} keys - size of element
+   * @return {State}
+   */
+  update(time: number, keys: TTrackKeys): State {
+    let actors = this.actors.map(actor => actor.update(time, this, keys));
+    let newState = new State(this.level, actors, this.status);
+
+    if (newState.status != "playing") return newState;
+
+    let player = newState.player;
+    if (this.level.touches(player.pos, player.size, "lava")) {
+      return new State(this.level, actors, "lost");
+    }
+
+    // when a player overlaps another actor (lava, enemy, coin) check how they collide
+    for (let actor of actors) {
+      // a player cannot overlap itself so no need for this check when actor is player
+      if (actor.type !== 'player' && overlap(actor, player)) {
+          newState = actor.collide(newState);
+      }
+    }
+    return newState;
+  }
 }
 
 export { State };

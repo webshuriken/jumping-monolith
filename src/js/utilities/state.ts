@@ -1,19 +1,23 @@
 /**
  * Jumping Monolith - Game Utilities
  * created: 2026
- * updated: 05-04-2026
+ * updated: 16-04-2026
  * author: Carlos E Alford
  * utility: State, to maintain game state for the 2 dimentional values
  * improvements:
  */
 
-import { overlap } from './util-functions'
-import { type TActorInstances, type ILevel } from "./level";
+import { 
+  overlap,
+  type TTrackKeys
+} from './util-functions';
+import { 
+  type TActorInstances, 
+  type ILevel 
+} from "./level";
 import { type IPlayer } from '../actors/player';
 
 
-export type TArrowKeys = "ArrowLeft" | "ArrowRight" | "ArrowUp";
-export type TTrackKeys = Partial<Record<TArrowKeys, boolean>> & { unregister: () => void };
 export type TGameStatus = 'playing' | 'won' | 'lost';
 export interface IState {
   actors: TActorInstances[];

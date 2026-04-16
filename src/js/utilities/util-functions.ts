@@ -1,21 +1,27 @@
 /**
  * Jumping Monolith - Game Utilities
  * created: 2026
- * updated: 2026
+ * updated: 16-04-2026
  * author: Carlos E Alford
  * utilities available:
  * - Vec: for the 2 dimentional values
  * improvements:
  */
-import { type TActorInstances, type ILevel } from "./level";
-import { type TArrowKeys, type TTrackKeys } from "./state";
+import { 
+  type TActorInstances, 
+  type ILevel 
+} from "./level";
 import { type IPlayer } from "../actors/player";
 
 // ==========================
 // VARIABLES
 // ==========================
-// game scale
-// used by drawGird(), drawActor(), DOMDisplay.scrollPlayerIntoView()
+// keys we will track for grame play
+export const TrackedGameKeys = ["ArrowLeft", "ArrowRight", "ArrowUp"] as const;
+export type TArrowKeys = typeof TrackedGameKeys[number];
+export type TTrackKeys = Partial<Record<TArrowKeys, boolean>> & { unregister: () => void };
+
+// game scale used by drawGird(), drawActor(), DOMDisplay.scrollPlayerIntoView()
 const scale = 20;
 
 // ==========================
@@ -122,10 +128,10 @@ function overlap(actor1: Exclude<TActorInstances, IPlayer>, actor2: Extract<TAct
 
 /**
  * Only used by Player actor. Track keys pressed. Arrow keys (up, right, left) and 'p' to pause game.
- * @param {TArrowKeys[]} keys - string array of 3 possible keys
+ * @param {typeof TrackedGameKeys} keys - string array of 3 possible keys
  * @return {TTrackKeys}
  */
-function trackKeys(keys: TArrowKeys[]): TTrackKeys {
+function trackKeys(keys: typeof TrackedGameKeys): TTrackKeys {
   // their effects are active as long as the key is held down
   const activeKeys: TTrackKeys = Object.create(null);
 

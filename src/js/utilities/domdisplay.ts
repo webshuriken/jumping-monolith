@@ -20,7 +20,7 @@ import { type IState } from './state';
 interface IDOMDisplay {
   actorLayer: HTMLDivElement | null;
   readonly dom: HTMLDivElement;
-  clear: () => {};
+  clear(): void;
   syncState(state: IState):  void;
   scrollPlayerIntoView(state: IState): void;
 }
@@ -30,7 +30,7 @@ interface IDOMDisplay {
  * @param {object} parent - element to append game grid to
  * @param {object} level - current level map
  */
-class DOMDisplay {
+class DOMDisplay implements IDOMDisplay {
   readonly dom: HTMLDivElement;
   actorLayer: HTMLDivElement | null;
 

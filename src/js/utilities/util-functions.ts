@@ -17,8 +17,8 @@ import { type IPlayer } from "../actors/player";
 // VARIABLES
 // ==========================
 // keys we will track for grame play
-export const TrackedGameKeys = ["ArrowLeft", "ArrowRight", "ArrowUp"] as const;
-export type TArrowKeys = typeof TrackedGameKeys[number];
+export const TrackedArrowKeys = ["ArrowLeft", "ArrowRight", "ArrowUp"] as const;
+export type TArrowKeys = typeof TrackedArrowKeys[number];
 export type TTrackKeys = Partial<Record<TArrowKeys, boolean>> & { unregister: () => void };
 
 // game scale used by drawGird(), drawActor(), DOMDisplay.scrollPlayerIntoView()
@@ -128,10 +128,10 @@ function overlap(actor1: Exclude<TActorInstances, IPlayer>, actor2: Extract<TAct
 
 /**
  * Only used by Player actor. Track keys pressed. Arrow keys (up, right, left) and 'p' to pause game.
- * @param {typeof TrackedGameKeys} keys - string array of 3 possible keys
+ * @param {typeof TrackedArrowKeys} keys - string array of 3 possible keys
  * @return {TTrackKeys}
  */
-function trackKeys(keys: typeof TrackedGameKeys): TTrackKeys {
+function trackKeys(keys: typeof TrackedArrowKeys): TTrackKeys {
   // their effects are active as long as the key is held down
   const activeKeys: TTrackKeys = Object.create(null);
 

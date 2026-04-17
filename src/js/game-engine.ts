@@ -1,7 +1,7 @@
 /**
  * Jumping Monolith - Browser game
  * created: 2020
- * updated: 2026
+ * updated: 16-04-2026
  * author: Carlos E Alford
  * IMPROVEMENTS:
  * - runGame function is returning the value of game status but the function is a Promise so this return is not useful. Remove the return value and resolve promise.
@@ -12,21 +12,31 @@
  */
 
 // Load the module with the game maps
-import { GAME_LEVELS } from './main-barrel.js';
+import { GAME_LEVELS } from './main-barrel';
 
 // Utilities
-import { DOMDisplay } from './utilities/domdisplay.js';
-import { State } from './utilities/state.js';
-import { Level } from './utilities/level.js';
-import { trackKeys } from './utilities/util-functions.js';
+import { DOMDisplay } from './utilities/domdisplay';
+import { State } from './utilities/state';
+import { 
+  trackKeys, 
+  TrackedArrowKeys,
+} from './utilities/util-functions';
+import { 
+  Level, 
+  type ILevel 
+} from './utilities/level';
+
+// Types
+type TGameResult = 'won' | 'lost';
+type TGameRunning = 'yes' | 'no' | 'pausing';
 
 // ==========================
 // RUNNING THE GAME
 // ==========================
 
 /**
- * @description Wrapper function for requestAnimationFrame()
- * @param {object} framFunc - function that expects a time difference
+ * Wrapper function for requestAnimationFrame()
+ * @param {object} frameFunc - function that expects a time difference
  */
 function runAnimation(frameFunc) {
   // Max frame step = 100ms
@@ -48,60 +58,78 @@ function runAnimation(frameFunc) {
 }
 
 /**
- * @description Displays the level in document letting user play
- * @param {object} level - current game level
- * @param {object} Display - a constructor
- * @param {object} gameWrapper - DOM element
+ * Displays the level in document letting user play
+ * @param {ILevel} level - instance of Level class
+ * @param {typeof DOMDisplay} Display - DOMDisplay constructor
+ * @param {HTMLDivElement} gameWrapper - div used to display the game
  * @return {promise}
  */
-function runLevel(level, Display, gameWrapper) {
-  let display = new Display(gameWrapper, level);
+function runLevel(
+  level: ILevel, 
+  Display: typeof DOMDisplay, 
+  gameWrapper: HTMLDivElement
+): Promise<TGameResult> {
+  // lets get the DOM for the level ready
+  const display = new Display(gameWrapper, level);
+  // create a new state with current level, whatever level it may be
   let state = State.start(level);
   let ending = 1;
   // As suggested in EloquentJS, ther is a 'running' state
-  let running = 'yes';
+  let running: TGameRunning = 'yes';
 
   return new Promise(resolve => {
 
     // check if game has been paused
-    function pauseHandler(event) {
-      if (event.key != 'p') return;
+    function pauseHandler(event: KeyboardEvent) {
+      // ignore all keypress other than "p"
+      if (event.key.toLowerCase() !== 'p') return;
       event.preventDefault()
-      // swap between running states;
-      if (running == 'no') {
-        running = 'yes';
-        runAnimation(frame);
-      } else if (running == 'yes') {
-        running = 'pausing';
-      } else {
-        running = 'yes';
+
+      // swap between running states
+      switch (running) {
+        case "no":
+          running = 'yes';
+          runAnimation(frame);
+          break;
+        case "yes":
+          running = "pausing";
+          break;
       }
     }
 
-    // Add event handler to listen out for pause
+    // Add event handler to listen for game pause
     window.addEventListener('keydown', pauseHandler);
-    let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp"]);
 
-    function frame(time) {
-      // check game state
-      if (running == 'pausing') {
+    // name for the keys we will track during the game
+    const arrowKeys = trackKeys(TrackedArrowKeys);
+
+    // frame only gets called while the game is active
+    function frame(time: number) {
+      // is the player trying to pause the game
+      if (running === 'pausing') {
+        console.log('OA')
         running = 'no';
         return false;
       }
 
-      // Run the game
+      // udpate what all the actors are doing
       state = state.update(time, arrowKeys);
+
+      // show what all the actors are doing
       display.syncState(state);
+
+      // is the game running or did the player die
       if (state.status == 'playing') {
         return true;
-      } else if (ending > 0) {
-        // NOTE: when the player touches an enemy this is called many times
-        // each time the value is decreased by 0.183000000000000 to 0.16629999999999978
-        // IS IT NESCESSARY?
+      }
+
+      // player finished level or died, either way lets wrap up
+      if (ending > 0) {
+        // FUTURE USE: add animation for player death or even better win
         ending -= time;
         return true;
       } else {
-        // Game ends or reloads, clear screen and remove events
+        //Game ends or reloads, clear screen and remove events
         display.clear();
         window.removeEventListener('keydown', pauseHandler);
         arrowKeys.unregister();
@@ -109,6 +137,7 @@ function runLevel(level, Display, gameWrapper) {
         return false;
       }
     }
+    // call to draw single game frame
     runAnimation(frame);
   });
 }
@@ -145,10 +174,10 @@ async function runGame(plans, Display, gameWrapper) {
 }
 
 /**
- * @description Loads the game
- * @param {object} gameWrapper - DOM element queried from outside module
+ * Loads the game. To be used by a main script.
+ * @param {HTMLDivElement} gameWrapper - DOM element queried from outside module
  */
-export function loadGame(gameWrapper) {
+export function loadGame(gameWrapper: HTMLDivElement) {
   let game = runGame(GAME_LEVELS, DOMDisplay, gameWrapper);
   return game;
 }

@@ -36,25 +36,26 @@ type TGameRunning = 'yes' | 'no' | 'pausing';
 
 /**
  * Wrapper function for requestAnimationFrame()
- * @param {object} frameFunc - function that expects a time difference
+ * @param {(time: number) => boolean} drawSingleFrame - function that expects a time difference
  */
-function runAnimation(frameFunc) {
+function runAnimation(drawSingleFrame: (time: number) => boolean) {
   // Max frame step = 100ms
-  let lastTime = null;
+  let lastTime: number | null = null;
 
   // Draws a single fram
-  function frame(time) {
+  function aniFrame(time:  number) {
     if (lastTime != null) {
       // convert time step to seconds
-      let timeStep = Math.min(time - lastTime, 100) / 1000;
-      // on false, animation stops
-      if (frameFunc(timeStep) === false) return;
+      const timeStep = Math.min(time - lastTime, 100) / 1000;
+      // draw next frame or stop/pause animation
+      if (drawSingleFrame(timeStep) === false) return;
     }
     lastTime = time;
-    requestAnimationFrame(frame);
+    // continuous request to animation to draw single frame
+    requestAnimationFrame(aniFrame);
   }
-  // first request to animation frame
-  requestAnimationFrame(frame);
+  // request to animation frame on new or game reload
+  requestAnimationFrame(aniFrame);
 }
 
 /**
@@ -89,7 +90,8 @@ function runLevel(
       switch (running) {
         case "no":
           running = 'yes';
-          runAnimation(frame);
+          // call to draw single game frame
+          runAnimation(drawSingleFrame);
           break;
         case "yes":
           running = "pausing";
@@ -103,8 +105,12 @@ function runLevel(
     // name for the keys we will track during the game
     const arrowKeys = trackKeys(TrackedArrowKeys);
 
-    // frame only gets called while the game is active
-    function frame(time: number) {
+    /**
+     * updates actors states and sync display to draw single game frame
+     * @param {number} time 
+     * @returns boolean
+     */
+    function drawSingleFrame(time: number) {
       // is the player trying to pause the game
       if (running === 'pausing') {
         console.log('OA')
@@ -138,7 +144,7 @@ function runLevel(
       }
     }
     // call to draw single game frame
-    runAnimation(frame);
+    runAnimation(drawSingleFrame);
   });
 }
 

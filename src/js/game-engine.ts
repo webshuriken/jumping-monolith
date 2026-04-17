@@ -1,7 +1,7 @@
 /**
  * Jumping Monolith - Browser game
  * created: 2020
- * updated: 16-04-2026
+ * updated: 17-04-2026
  * author: Carlos E Alford
  * IMPROVEMENTS:
  * - runGame function is returning the value of game status but the function is a Promise so this return is not useful. Remove the return value and resolve promise.
@@ -59,7 +59,7 @@ function runAnimation(drawSingleFrame: (time: number) => boolean) {
 }
 
 /**
- * Displays the level in document letting user play
+ * Preps the DOM, game State, game keys, frame update of characters
  * @param {ILevel} level - instance of Level class
  * @param {typeof DOMDisplay} Display - DOMDisplay constructor
  * @param {HTMLDivElement} gameWrapper - div used to display the game
@@ -149,25 +149,36 @@ function runLevel(
 }
 
 /**
- * @description Change level on completion
- * @param {array} plans - game levels as array of strings
- * @param {object} Display - display constructor
- * @param {object} gameWrapper - DOM element
+ * Change level on completion
+ * @param {string[]} plans - game levels as array of strings
+ * @param {typeof DOMDisplay} Display - DOM display constructor
+ * @param {HTMLDivElement} gameWrapper - HTML div element displaying the game
+ * @returns Promise<TGameResult> 
  */
-async function runGame(plans, Display, gameWrapper) {
+async function runGame(
+  plans: string[], 
+  Display: typeof DOMDisplay, 
+  gameWrapper: HTMLDivElement
+): Promise<TGameResult> {
   // set starting level
   let level = 0;
-  let won;
+  let won: TGameResult = 'lost';
 
   // Loop will keep going as long as the player has lives left
   for (let lives = 3; lives > 0; lives--) {
-    console.log(`You have ${lives} lives left`);
-    won = await runLevel(new Level(plans[level]), Display, gameWrapper)
 
-    // Implementing player lives
+    // prep the level map making sure it is valid
+    const plan = plans[level];
+    if (plan === undefined) {
+      throw new Error("Can not load game. No level provided");
+    }
+
+    // game round outcome
+    won = await runLevel(new Level(plan), Display, gameWrapper);
+
+    // reset lives, load new level or end game if no further levels available
     if (won == 'won') {
       level++;
-      // reset lives if next level is available
       if (level < plans.length) {
         lives = 3;
       } else {
@@ -176,6 +187,7 @@ async function runGame(plans, Display, gameWrapper) {
       }
     }
   }
+
   return won;
 }
 

@@ -3,12 +3,6 @@
  * created: 2020
  * updated: 17-04-2026
  * author: Carlos E Alford
- * IMPROVEMENTS:
- * - runGame function is returning the value of game status but the function is a Promise so this return is not useful. Remove the return value and resolve promise.
- * - Tests:
- *  - for level MAPS:
- *    - map is construction only using valid characters
- *    - map Enemies and Coin can only move within valid areas, not through wall, unless its an intented features
  */
 
 // Load the module with the game maps

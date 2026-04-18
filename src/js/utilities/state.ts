@@ -4,7 +4,6 @@
  * updated: 16-04-2026
  * author: Carlos E Alford
  * utility: State, to maintain game state for the 2 dimentional values
- * improvements:
  */
 
 import { 

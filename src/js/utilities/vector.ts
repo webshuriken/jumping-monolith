@@ -4,7 +4,6 @@
  * updated: 05-04-2026
  * author: Carlos E Alford
  * utility: Vector, for the 2 dimentional values
- * improvements:
  */
 
 export interface IVector {

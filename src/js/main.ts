@@ -3,7 +3,6 @@
  * created: 2020
  * updated: 05-04-2026
  * author: Carlos E Alford
- * IMPROVEMENTS:
  */
 // load function from game engine to start game
 import {loadGame} from './game-engine.js';

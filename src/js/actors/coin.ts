@@ -3,7 +3,6 @@
  * created: 2026
  * updated: 05-04-2026
  * author: Carlos E Alford
- * improvements:
  */
 
 import { Vector, type IVector } from "../utilities/vector";

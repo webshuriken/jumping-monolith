@@ -3,9 +3,6 @@
  * created: 2026
  * updated: 16-04-2026
  * author: Carlos E Alford
- * utilities available:
- * - Vec: for the 2 dimentional values
- * improvements:
  */
 import { 
   type TActorInstances, 

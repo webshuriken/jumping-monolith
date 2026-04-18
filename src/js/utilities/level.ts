@@ -4,7 +4,6 @@
  * updated: 14-04-2026
  * author: Carlos E Alford
  * utility: Level, tracks the game level
- * improvements:
  */
 
 import { Player } from "../actors/player";

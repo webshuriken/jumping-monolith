@@ -4,7 +4,6 @@
  * updated: 05-04-2026
  * author: Carlos E Alford
  * utility: DOMDisplay, to maintain the browsers DOM
- * improvements:
  */
 
 import { 

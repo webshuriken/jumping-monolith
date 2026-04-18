@@ -1,13 +1,12 @@
-/*FONT*/
+/* =========== FONT =========== */
 @font-face {
   font-family: "orbitron";
   font-style: normal;
   font-weight: normal;
-  src: url("fonts/Orbitron-Regular.ttf") format("truetype");
+  src: url("../fonts/Orbitron-Regular.ttf") format("truetype");
 }
 
-
-/*GLOBAL STYLES*/
+/* =========== GLOBAL STYLES =========== */
 body,
 header,
 ul,
@@ -17,29 +16,47 @@ h1,
 h2 {
   list-style: none;
   margin: 0;
+  border: none;
   padding: 0;
   text-decoration: none;
 }
 
+:root {
+  /* site colours */
+  --c-primary: 51, 51, 51; /* #333333 */
+  --c-secondary: 255, 241, 223; /* #fff1df */
+  --c-accent: 9, 127, 67; /* #097f43 */
+  --c-white: 255, 255, 255; /* #ffffff */
+  /* game colours */
+  --c-player: 44, 40, 40; /* #2c2828 */
+  --c-player-dead: 176, 17, 17; /* #b01111 */
+  --c-player-won: 222, 249, 206; /* #def9ce */
+  --c-lava: 255, 100, 100; /* #ff6464 */
+  --c-enemy: 128, 0, 128; /* #800080 */
+  --c-coin: 241, 229, 89; /* #f1e559 */
+  --c-walls: 245, 245, 245; /* #f5f5f5 */
+  --c-bg: 52, 166, 251; /* #34a6fb */
+}
+
 a:link {
-  color: #333;
+  color: rgb(var(--c-primary));
 }
 
 a:visited {
-  color: #333;
+  color: rgb(var(--c-primary));
 }
 
 a:hover {
-  color: #097F43;
+  color: rgb(var(--c-accent));
 }
 
 a:active {
-  color: #fff;
+  color: var(--white);
 }
 
 .page-container {
-  background: #fff1df;
-  color: #333;
+  background: rgb(var(--c-secondary));
+  color: rgb(var(--c-primary));
   display: flex;
   flex-flow: column nowrap;
   font-family: "orbitron";
@@ -47,7 +64,7 @@ a:active {
 }
 
 
-/*DRY pricipal*/
+/* =========== DRY pricipal =========== */
 .text-center {
   text-align: center;
 }
@@ -61,7 +78,7 @@ a:active {
 }
 
 
-/*HEADER*/
+/* =========== HEADER =========== */
 header {
   align-items: center;
   display: flex;
@@ -69,7 +86,7 @@ header {
 }
 
 .site-title {
-  color: #097f43;
+  color: rgb(var(--c-accent));
   flex-grow: 2;
 }
 
@@ -92,7 +109,7 @@ header {
   top: 0;
   height: 100%;
   width: 100%;
-  background: #097f43;
+  background: rgb(var(--c-accent));
   opacity: 0;
   transition: opacity .32s;
   z-index: -1;
@@ -105,9 +122,9 @@ header {
 }
 
 
-/*BODY*/
+/* =========== BODY =========== */
 main {
-  background: #333333;
+  background: rgb(var(--c-primary));
   height: 80%;
 }
 
@@ -121,7 +138,7 @@ main {
 }
 
 
-/*FOOTER*/
+/* =========== FOOTER =========== */
 
 footer {
   font-size: .8em;
@@ -129,33 +146,35 @@ footer {
 }
 
 
-/*PLAY BUTTON*/
+/* =========== PLAY BUTTON =========== */
 .start-btn-holder {
-  height: 60px;
   position: absolute;
+  height: 60px;
+  width: 160px;
   transform: scale(0);
   transition: transform .24s;
-  width: 160px;
 }
 
 .start-btn-holder button {
-  background: #097f43;
-  border: 2px solid #000;
-  box-shadow: 0 4px 6px 0 rgba(255,255,255,.4), 0 6px 16px 0 rgba(255,255,255,.5);
-  color: #fff;
-  font: 600 1.8em orbitron;
-  height: 100%;
-  letter-spacing: 2px;
+  background: rgb(var(--c-accent));
+  border: 1px solid rgb(var(--c-white));
+  border-radius: 4px;
   padding: 10px 0;
+  height: 100%;
   width: 100%;
+  color: rgb(var(--c-white));
+  font: 600 1.8em orbitron;
+  letter-spacing: 2px;
+  box-shadow: 0 0 8px 0 rgba(var(--c-white), 0.2), 0 0 16px 0 rgba(var(--c-white), 0.4);
+  text-shadow: 1px 1px rgb(var(--c-primary));
 }
 
 .start-btn-holder button:hover {
-  outline: 1px solid #fff;
+  outline: 1px solid rgb(var(--c-white));
 }
 
 .start-btn-holder button:active {
-  background: #83dbae;
+  background: rgba(var(--c-accent), 0.6);
 }
 
 .start-btn-holder.active {
@@ -163,9 +182,9 @@ footer {
 }
 
 
-/*GAME*/
+/* =========== GAME =========== */
 .background{
-  background: rgb(52, 166, 251);
+  background: rgb(var(--c-bg));
   border-spacing: 0;
   table-layout: fixed;
 }
@@ -175,15 +194,15 @@ footer {
 }
 
 .lava{
-  background: rgb(255, 100, 100);
+  background: rgb(var(--c-lava));
 }
 
 .enemy {
-  background: purple;
+  background: rgb(var(--c-enemy));
 }
 
 .wall {
-  background: white;
+  background: rgb(var(--c-walls));
 }
 
 .actor {
@@ -191,20 +210,20 @@ footer {
 }
 
 .coin {
-  background: rgb(241, 229, 89);
+  background: rgb(var(--c-coin));
 }
 
 .player {
-  background: rgb(64, 64, 64);
+  background: rgb(var(--c-player));
 }
 
 /*Win or Loose*/
 .lost .player {
-  background: rgb(160, 64, 64);
+  background: rgb(var(--c-player-dead));
 }
 
 .won .player {
-  box-shadow: -4px -7px 8px white, 4px -7px 8px white;
+  box-shadow: -4px -7px 8px rgb(var(--c-player-won)), 4px -7px 8px rgb(var(--c-player-won));
 }
 
 .game {
@@ -218,7 +237,7 @@ footer {
 }
 
 
-/*HOW TO PLAY MODAL*/
+/* ===========HOW TO PLAY MODAL =========== */
 .ht-modal {
   background: none;
   border: none;
@@ -226,18 +245,18 @@ footer {
 
 }
 .ht-modal::backdrop {
-  background-color: rgba(9, 127, 67,.6);
+  background-color: rgba(var(--c-accent),.6);
 }
 
 .ht-modal-content {
-  background-color: #fff1df;
-  border: 1px solid #888;
+  background-color: rgb(var(--c-secondary));
+  border: 1px solid rgb(var(--c-primary));
   margin: 12% auto;
   max-width: 572px;
   padding: 20px 10px;
   position: relative;
   width: 88%;
-  box-shadow: 0 0 16px rgba(51,51,51,.5);
+  box-shadow: 0 0 16px rgba(var(--c-primary),.5);
 }
 
 .close-modal-btn {
@@ -252,7 +271,7 @@ footer {
 
 .close-modal-btn:hover,
 .th-close-modal:focus {
-  color: #000;
+  color: rgb(var(--c-primary));
   text-decoration: none;
   cursor: pointer;
 }
@@ -274,7 +293,7 @@ footer {
 }
 
 
-/*MEDIA QUERIES*/
+/* =========== MEDIA QUERIES =========== */
 @media (min-width: 600px) {
   .main-menu ul li button {
     font-size: 1em;

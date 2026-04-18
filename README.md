@@ -48,7 +48,9 @@ Right now there is only 1 level available. I am currently designing a few more l
 
 **Lava:**
 
-- lava obstacles that move up and down
+- able to move vertically
+- able to move horizontally
+- drips from the a set location vertically, resetting once it hits the ground
 
 **Enemies:**
 
@@ -56,11 +58,14 @@ Right now there is only 1 level available. I am currently designing a few more l
 
 **Player:**
 
-- player can destroy enemies by jumping on top of them
+- moves left and right at constant speed
+- jumps at constant height regardless of keypress length
+- destroys enemies by jumping on top of them
 
 **Level:**
 
-- limited number of level retries
+- player only gets 3 tries per level
+- player lives reset back to 3 on each new level
 
 ## Road map
 

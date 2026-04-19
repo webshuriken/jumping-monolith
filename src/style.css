@@ -78,27 +78,29 @@ a:active {
 }
 
 
-/* =========== HEADER =========== */
-header {
-  align-items: center;
+/* =========== SITE HEADER =========== */
+.site-header {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .2rem;
   height: 12%;
 }
 
 .site-title {
   color: rgb(var(--c-accent));
-  flex-grow: 2;
+  font-size: 1.4rem;
 }
 
-.main-menu {
-  flex-grow: 1;
-}
+.main-menu {}
 
 .main-menu ul li button {
   position: relative;
   border: none;
   padding: .6rem;
   background: none;
+  font-family: 'orbitron';
   font-size: .9em;
   z-index: 40;
 }
@@ -140,9 +142,15 @@ main {
 
 /* =========== FOOTER =========== */
 
-footer {
+.site-footer {
+  display: flex;
+  align-items: center;
   font-size: .8em;
   height: 8%;
+}
+
+.site-footer p {
+  width: 100%;
 }
 
 
@@ -300,13 +308,32 @@ footer {
   }
 }
 
+@media (min-width: 768px) {
+  /* =========== SITE HEADER =========== */
+  .site-header {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .site-title {
+    font-size: 1.6rem;
+  }
+}
+
 @media (min-width: 900px) {
+  /* =========== SITE HEADER =========== */
+  .site-title {
+    font-size: 1.8rem;
+  }
   .ht-modal-content {
     margin: 10% auto;
   }
 }
 
 @media (min-width: 1200px) {
+  /* =========== SITE HEADER =========== */
+  .site-title {
+    font-size: 2rem;
+  }
   .ht-modal-content {
     margin: 6% auto;
   }

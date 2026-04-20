@@ -31,18 +31,11 @@ Because we use `ES6` modules and due to CORS policy the game can't be run direct
 - Python: If you have Python installed, run this in your project folder: `python -m http.server`
 - Node.js: If you prefer Node, run `npx serve`
 
-## How to Play
+## Screenshot
 
-- The game has one simple goal: `collect all the coins`.
-- Use the `left` arrow-key and `right` arrow-key to `move`
-- Use the `up` arrow-key to `jump`
-- Don't let the lava touch you or the level will restart.
-- Enemies will take a live and restart a level when they touch you.
-- Land on top of the enemy to destry them!
+![screenshot of landing page with play button](screenshot-home.png)
 
-**NOTE:**
-
-Right now there is only 1 level available. I am currently designing a few more levels. :smiley:
+![screenshot of game play](screenshot-game.png)
 
 ## Game Features
 
@@ -82,8 +75,8 @@ These are the features or ideas to be implemented in due course.
 - [X] Refactor the files within the app to improve logic
 - [X] Improve `How to Play` screen
 - [X] Improve color pallet of game
-- [ ] Refactor CSS separating styling more logically and use variables
-- [ ] Add game screenshot to README
+- [X] Refactor CSS separating styling more logically and use variables
+- [X] Add game screenshot to README
 
 ### Version 1.2.1
 

@@ -68,7 +68,7 @@ These are the features or ideas to be implemented in due course.
 2. Minor version (New features, backward-compatible)
 3. Patch version (Bug fixes, small improvements)
 
-### Version 1.2.0
+### Version 1.1.0
 
 - [X] Refactor game engine so that functions and classes location is more logical. Separating concerns.
 - [X] Migrate all JavaScript codebase to TypeScript
@@ -78,12 +78,12 @@ These are the features or ideas to be implemented in due course.
 - [X] Refactor CSS separating styling more logically and use variables
 - [X] Add game screenshot to README
 
-### Version 1.2.1
+### Version 1.1.1
 
 - [ ] Tests for level MAPS, only the valid strings are used to create it
 - [ ] Add option to quit game using the `q` or `esc` character with a modal asking to confirm action
 
-### Version 1.2.2
+### Version 1.2.0
 
 - [ ] Implement time tracking, how long does the player take to complete level
 - [ ] Display time taken to complete the level at the end of level
@@ -91,7 +91,7 @@ These are the features or ideas to be implemented in due course.
 - [ ] Display score of coins collected
 - [ ] User can select levels. Levels are played until the end from selected level
 
-### Version 1.2.3
+### Version 1.2.1
 
 - [ ] Player can do a smaller jump with a quick press of the up arrow-key
 - [ ] Allow player to crouch, becoming a single pixel block

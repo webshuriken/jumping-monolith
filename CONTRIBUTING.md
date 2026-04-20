@@ -1,6 +1,6 @@
 # Welcome to Jumping Monolith contributing guide
 
-Thank you for taking the time to contribute to the project!. New levels are always appreciated.
+Thank you for taking the time to contribute to the project!. New levels are always appreciated. `^_^`
 
 ## What we're looking for
 

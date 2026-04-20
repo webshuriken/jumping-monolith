@@ -1,0 +1,354 @@
+/* =========== FONT =========== */
+@font-face {
+  font-family: "orbitron";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/Orbitron-Regular.ttf") format("truetype");
+}
+
+/* =========== GLOBAL STYLES =========== */
+body,
+header,
+ul,
+li,
+a,
+h1,
+h2 {
+  list-style: none;
+  margin: 0;
+  border: none;
+  padding: 0;
+  text-decoration: none;
+}
+
+:root {
+  /* site colours */
+  --c-primary: 51, 51, 51; /* #333333 */
+  --c-secondary: 255, 241, 223; /* #fff1df */
+  --c-accent: 9, 127, 67; /* #097f43 */
+  --c-white: 255, 255, 255; /* #ffffff */
+  /* game colours */
+  --c-player: 44, 40, 40; /* #2c2828 */
+  --c-player-dead: 176, 17, 17; /* #b01111 */
+  --c-player-won: 222, 249, 206; /* #def9ce */
+  --c-lava: 212, 51, 51; /* #d43333 */
+  --c-enemy: 150, 18, 150; /* #961296 */
+  --c-coin: 255, 237, 25; /* #ffed19 */
+  --c-level-walls-easy: 62, 80, 79; /* #3e504f */
+  --c-level-walls-medium: 79, 96, 70; /* #4f6046 */
+  --c-level-walls-hard: 92, 31, 31; /* #5c1f1f */
+  --c-level-bg-easy: 175, 208, 207; /* #afd0cf*/
+  --c-level-bg-medium: 187, 208, 175; /* #bbd0af*/
+  --c-level-bg-hard: 208, 180, 175; /* #d0b4af */
+}
+
+a:link {
+  color: rgb(var(--c-primary));
+}
+
+a:visited {
+  color: rgb(var(--c-primary));
+}
+
+a:hover {
+  color: rgb(var(--c-accent));
+}
+
+a:active {
+  color: var(--white);
+}
+
+.page-container {
+  background: rgb(var(--c-secondary));
+  color: rgb(var(--c-primary));
+  display: flex;
+  flex-flow: column nowrap;
+  font-family: "orbitron";
+  height: 100vh;
+}
+
+
+/* =========== DRY pricipal =========== */
+.text-center {
+  text-align: center;
+}
+
+.standout-words {
+  font-weight: 700;
+}
+
+.hr-rule{
+  margin-top: 64px;
+}
+
+
+/* =========== SITE HEADER =========== */
+.site-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .2rem;
+  height: 12%;
+}
+
+.site-title {
+  color: rgb(var(--c-accent));
+  font-size: 1.4rem;
+}
+
+.main-menu {}
+
+.main-menu ul li button {
+  position: relative;
+  border: none;
+  padding: .6rem;
+  background: none;
+  font-family: 'orbitron';
+  font-size: .9em;
+  z-index: 40;
+}
+.main-menu ul li button::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: 1px solid rgb(var(--c-primary));
+  border-radius: 4px;
+  height: 100%;
+  width: 100%;
+  background: rgb(var(--c-accent));
+  opacity: 0;
+  transition: opacity .32s;
+  z-index: -1;
+}
+.main-menu ul li button:hover {
+  cursor: pointer;
+}
+.main-menu ul li button:hover::before {
+  opacity: .6;
+}
+
+
+/* =========== BODY =========== */
+main {
+  background: rgb(var(--c-primary));
+  height: 80%;
+}
+
+.game-wrapper {
+  align-items: center;
+  display: flex;
+  flex-flow: column wrap;
+  height: calc(100% - 16px);
+  justify-content: center;
+  padding: 8px;
+}
+
+
+/* =========== FOOTER =========== */
+
+.site-footer {
+  display: flex;
+  align-items: center;
+  font-size: .8em;
+  height: 8%;
+}
+
+.site-footer p {
+  width: 100%;
+}
+
+
+/* =========== PLAY BUTTON =========== */
+.start-btn-holder {
+  position: absolute;
+  height: 60px;
+  width: 160px;
+  transform: scale(0);
+  transition: transform .24s;
+}
+
+.start-btn-holder button {
+  background: rgb(var(--c-accent));
+  border: 1px solid rgb(var(--c-white));
+  border-radius: 4px;
+  padding: 10px 0;
+  height: 100%;
+  width: 100%;
+  color: rgb(var(--c-white));
+  font: 600 1.8em orbitron;
+  letter-spacing: 2px;
+  box-shadow: 0 0 8px 0 rgba(var(--c-white), 0.2), 0 0 16px 0 rgba(var(--c-white), 0.4);
+  text-shadow: 1px 1px rgb(var(--c-primary));
+}
+
+.start-btn-holder button:hover {
+  outline: 1px solid rgb(var(--c-white));
+  cursor: pointer;
+}
+
+.start-btn-holder button:active {
+  background: rgba(var(--c-accent), 0.6);
+}
+
+.start-btn-holder.active {
+  transform: scale(1);
+}
+
+
+/* =========== GAME =========== */
+.background {
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+.background td {
+  padding: 0;
+}
+
+.lava{
+  background: rgb(var(--c-lava));
+}
+
+.enemy {
+  background: rgb(var(--c-enemy));
+}
+
+.empty {
+  background: rgb(var(--c-level-bg-easy));
+}
+
+.wall {
+  background: rgb(var(--c-level-walls-easy));
+}
+
+.actor {
+  position: absolute;
+}
+
+.coin {
+  background: rgb(var(--c-coin));
+}
+
+.player {
+  background: rgb(var(--c-player));
+}
+
+/*Win or Loose*/
+.lost .player {
+  background: rgb(var(--c-player-dead));
+}
+
+.won .player {
+  box-shadow: -4px -7px 8px rgb(var(--c-player-won)), 4px -7px 8px rgb(var(--c-player-won));
+}
+
+.game {
+  height: auto;
+  max-height: 438px;
+  max-width: 632px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  z-index: 444;
+}
+
+
+/* =========== HOW TO PLAY MODAL =========== */
+.ht-modal {
+  background: none;
+  border: none;
+  padding: 0;
+
+}
+.ht-modal::backdrop {
+  background-color: rgba(var(--c-accent),.6);
+}
+
+.ht-modal-content {
+  background-color: rgb(var(--c-secondary));
+  border: 1px solid rgb(var(--c-primary));
+  margin: 12% auto;
+  max-width: 572px;
+  padding: 20px 10px;
+  position: relative;
+  width: 88%;
+  box-shadow: 0 0 16px rgba(var(--c-primary),.5);
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-modal-btn:hover,
+.th-close-modal:focus {
+  color: rgb(var(--c-primary));
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ht-modal-title h2 {
+  font-size: 1.2rem;
+}
+
+.ht-modal-body {
+  letter-spacing: 1px;
+  padding-top: 16px;
+}
+
+.ht-modal-body p {
+  margin: 28px 0;
+}
+
+.howto-legend {
+  display: inline-block;
+  height: 20px;
+  margin-right: 8px;
+  width: 20px;
+}
+
+
+/* =========== MEDIA QUERIES =========== */
+@media (min-width: 600px) {
+  .main-menu ul li button {
+    font-size: 1em;
+  }
+}
+
+@media (min-width: 768px) {
+  /* =========== SITE HEADER =========== */
+  .site-header {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .site-title {
+    font-size: 1.6rem;
+  }
+}
+
+@media (min-width: 900px) {
+  /* =========== SITE HEADER =========== */
+  .site-title {
+    font-size: 1.8rem;
+  }
+  .ht-modal-content {
+    margin: 10% auto;
+  }
+}
+
+@media (min-width: 1200px) {
+  /* =========== SITE HEADER =========== */
+  .site-title {
+    font-size: 2rem;
+  }
+  .ht-modal-content {
+    margin: 6% auto;
+  }
+}

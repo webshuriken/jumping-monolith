@@ -81,7 +81,7 @@ These are the features or ideas to be implemented in due course.
 - [X] Migrate all JavaScript codebase to TypeScript
 - [X] Refactor the files within the app to improve logic
 - [X] Improve `How to Play` screen
-- [ ] Improve color pallet of game
+- [X] Improve color pallet of game
 - [ ] Refactor CSS separating styling more logically and use variables
 - [ ] Add game screenshot to README
 

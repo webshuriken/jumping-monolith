@@ -31,11 +31,15 @@ h2 {
   --c-player: 44, 40, 40; /* #2c2828 */
   --c-player-dead: 176, 17, 17; /* #b01111 */
   --c-player-won: 222, 249, 206; /* #def9ce */
-  --c-lava: 255, 100, 100; /* #ff6464 */
-  --c-enemy: 128, 0, 128; /* #800080 */
-  --c-coin: 241, 229, 89; /* #f1e559 */
-  --c-walls: 245, 245, 245; /* #f5f5f5 */
-  --c-bg: 52, 166, 251; /* #34a6fb */
+  --c-lava: 212, 51, 51; /* #d43333 */
+  --c-enemy: 150, 18, 150; /* #961296 */
+  --c-coin: 255, 237, 25; /* #ffed19 */
+  --c-level-walls-easy: 62, 80, 79; /* #3e504f */
+  --c-level-walls-medium: 79, 96, 70; /* #4f6046 */
+  --c-level-walls-hard: 92, 31, 31; /* #5c1f1f */
+  --c-level-bg-easy: 175, 208, 207; /* #afd0cf*/
+  --c-level-bg-medium: 187, 208, 175; /* #bbd0af*/
+  --c-level-bg-hard: 208, 180, 175; /* #d0b4af */
 }
 
 a:link {
@@ -194,8 +198,7 @@ main {
 
 
 /* =========== GAME =========== */
-.background{
-  background: rgb(var(--c-bg));
+.background {
   border-spacing: 0;
   table-layout: fixed;
 }
@@ -212,8 +215,12 @@ main {
   background: rgb(var(--c-enemy));
 }
 
+.empty {
+  background: rgb(var(--c-level-bg-easy));
+}
+
 .wall {
-  background: rgb(var(--c-walls));
+  background: rgb(var(--c-level-walls-easy));
 }
 
 .actor {

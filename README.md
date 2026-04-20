@@ -80,6 +80,7 @@ These are the features or ideas to be implemented in due course.
 - [X] Refactor game engine so that functions and classes location is more logical. Separating concerns.
 - [X] Migrate all JavaScript codebase to TypeScript
 - [X] Refactor the files within the app to improve logic
+- [X] Improve `How to Play` screen
 - [ ] Improve color pallet of game
 - [ ] Refactor CSS separating styling more logically and use variables
 - [ ] Add game screenshot to README
@@ -87,7 +88,6 @@ These are the features or ideas to be implemented in due course.
 ### Version 1.2.1
 
 - [ ] Tests for level MAPS, only the valid strings are used to create it
-- [ ] Improve `How to Play` screen
 - [ ] Add option to quit game using the `q` or `esc` character with a modal asking to confirm action
 
 ### Version 1.2.2

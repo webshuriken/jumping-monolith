@@ -109,6 +109,8 @@ a:active {
   position: absolute;
   left: 0;
   top: 0;
+  border: 1px solid rgb(var(--c-primary));
+  border-radius: 4px;
   height: 100%;
   width: 100%;
   background: rgb(var(--c-accent));
@@ -179,6 +181,7 @@ main {
 
 .start-btn-holder button:hover {
   outline: 1px solid rgb(var(--c-white));
+  cursor: pointer;
 }
 
 .start-btn-holder button:active {
@@ -245,7 +248,7 @@ main {
 }
 
 
-/* ===========HOW TO PLAY MODAL =========== */
+/* =========== HOW TO PLAY MODAL =========== */
 .ht-modal {
   background: none;
   border: none;
@@ -282,6 +285,10 @@ main {
   color: rgb(var(--c-primary));
   text-decoration: none;
   cursor: pointer;
+}
+
+.ht-modal-title h2 {
+  font-size: 1.2rem;
 }
 
 .ht-modal-body {

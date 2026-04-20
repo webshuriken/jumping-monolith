@@ -1,6 +1,8 @@
-const levelBlueprint = {
+import type { ILevelBlueprint } from '../../types/interfaces';
+
+const levelBlueprint: ILevelBlueprint = {
   name: 'Level 3',
-  date: '2020',
+  date: '06-06-2020',
   author: 'Carlos E Alford',
   map: ''
 }

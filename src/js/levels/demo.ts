@@ -1,6 +1,8 @@
-const levelBlueprint = {
+import type { ILevelBlueprint } from '../../types/interfaces';
+
+const levelBlueprint: ILevelBlueprint = {
   name: 'demo',
-  date: '2020',
+  date: '06-06-2020',
   author: 'EloquentJavascript',
   map: ''
 }

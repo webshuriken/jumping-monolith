@@ -30,11 +30,13 @@ if (howToModal instanceof HTMLDialogElement) {
 function startGame(gameWrapper: HTMLDivElement, startButton: HTMLButtonElement) {
   // disable start button to avoid multiple presses
   startButton.setAttribute('disabled', 'disabled');
+  startButton.classList.toggle('active');
 
   // call a promise that will re-enable the play button when resolved (game finished)
   loadGame(gameWrapper).then(() => {
     // enable start button
     startButton.removeAttribute('disabled');
+    startButton.classList.toggle('active');
   });
 }
 

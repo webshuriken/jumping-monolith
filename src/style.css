@@ -194,6 +194,7 @@ main {
 
 .start-btn-holder button.active {
   transform: scale(1);
+  transition-delay: .4s;
 }
 
 
@@ -252,7 +253,7 @@ main {
   position: relative;
   width: 100%;
   z-index: 444;
-  opacity: 0;
+  opacity: 1;
 }
 
 

@@ -15,7 +15,7 @@ These are the features or ideas to be implemented in due course.
 ## Version 1.1.1
 
 - [X] Move `Road Map` details to its own document called `ROADMAP.md`
-- [ ] Play button has a zoom in and out effect. Improve loading so we can appreaciate it.
+- [X] Play button has a zoom in and out effect. Improve loading so we can appreaciate it.
 - [ ] Tests for level MAPS, only the valid strings are used to create it
 - [ ] Add option to quit game using the `q` or `esc` character with a modal asking to confirm action
 

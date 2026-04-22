@@ -34,6 +34,7 @@ class DOMDisplay implements IDOMDisplay {
   actorLayer: HTMLDivElement | null;
   private domWidth: number = 0;
   private domHeight: number = 0;
+  private domMargin: number = 0;
 
   constructor(parent: HTMLDivElement, level: ILevel) {
     this.dom = elt("div", {class: "game"}, drawGrid(level));
@@ -66,6 +67,7 @@ class DOMDisplay implements IDOMDisplay {
   updateDimensions() {
     this.domWidth = this.dom.clientWidth;
     this.domHeight = this.dom.clientHeight;
+    this.domMargin = this.domWidth / 3;
   }
 
   /**
@@ -89,16 +91,10 @@ class DOMDisplay implements IDOMDisplay {
   };
 
   /**
-   * Keep the player within the center of the screen or there abouts
+   * Manipulate the div elements scroll position to keep the player centered
    * @param {IState} state - current game state
    */
   scrollPlayerIntoView(state: IState): void {
-    // We change the scroll position by manipulating that element’s
-    // scrollLeft and scrollTop properties when the player is too
-    // close to the edge.
-    let margin = this.domWidth / 3;
-
-    // The viewport
     let left = this.dom.scrollLeft;
     let right = left + this.domWidth;
     let top = this.dom.scrollTop;
@@ -108,16 +104,16 @@ class DOMDisplay implements IDOMDisplay {
     // calculates the position of the center of the players rectangle
     let center = player.pos.plus(player.size.times(0.5)).times(scale);
 
-    if (center.x < left + margin) {
-      this.dom.scrollLeft = center.x - margin;
-    } else if (center.x > right - margin) {
-      this.dom.scrollLeft = center.x + margin - this.domWidth;
+    if (center.x < left + this.domMargin) {
+      this.dom.scrollLeft = center.x - this.domMargin;
+    } else if (center.x > right - this.domMargin) {
+      this.dom.scrollLeft = center.x + this.domMargin - this.domWidth;
     }
     
-    if (center.y < top + margin) {
-      this.dom.scrollTop = center.y - margin;
-    } else if (center.y > bottom - margin) {
-      this.dom.scrollTop = center.y + margin - this.domHeight;
+    if (center.y < top + this.domMargin) {
+      this.dom.scrollTop = center.y - this.domMargin;
+    } else if (center.y > bottom - this.domMargin) {
+      this.dom.scrollTop = center.y + this.domMargin - this.domHeight;
     }
   };
 }

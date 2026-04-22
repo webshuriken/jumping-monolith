@@ -23,15 +23,23 @@ class Vector implements IVector {
   // their behaviour is different.
   constructor(public x: number, public y: number) {}
 
-  // Represent the current position and state of a given moving element in our game.
+  /**
+   * Represent the current position and state of a given moving element in our game.
+   * @param {IVector} other 
+   * @returns {Vector}
+   */
   plus(other: IVector): Vector {
     return new Vector(this.x + other.x, this.y + other.y);
   }
 
-  // Scales a Vector by a given number.
-  // to multiply a speed Vector by a time interval to get the
-  // distance travelled during that time.
+  /**
+   * Scales a Vector by a given number.
+   * @param {number} factor
+   * @returns {Vector}
+   */
   times(factor: number): Vector {
+    // to multiply a speed Vector by a time interval to get the
+    // distance travelled during that time.
     return new Vector(this.x * factor, this.y * factor);
   }
 }

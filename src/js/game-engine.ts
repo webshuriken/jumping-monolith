@@ -65,7 +65,7 @@ function runLevel(
   gameWrapper: HTMLDivElement
 ): Promise<TGameResult> {
   // lets get the DOM for the level ready
-  const display = new Display(gameWrapper, level);
+  const display = Display.create(gameWrapper, level);
   // create a new state with current level, whatever level it may be
   let state = State.start(level);
   let ending = 1;

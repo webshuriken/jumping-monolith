@@ -25,21 +25,48 @@ interface IDOMDisplay {
 }
 
 /**
- * @description Displays a given level and state.
+ * @description Displays a given level and state. Initialise using the 'create' method.
  * @param {object} parent - element to append game grid to
  * @param {object} level - current level map
  */
 class DOMDisplay implements IDOMDisplay {
   readonly dom: HTMLDivElement;
   actorLayer: HTMLDivElement | null;
+  private domWidth: number = 0;
+  private domHeight: number = 0;
 
   constructor(parent: HTMLDivElement, level: ILevel) {
     this.dom = elt("div", {class: "game"}, drawGrid(level));
     parent.appendChild(this.dom);
     this.actorLayer = null;
+    this.updateDimensions();
   }
 
-  clear() { this.dom.remove(); }
+  /**
+   * Remove the html element from DOM and event listener
+   */
+  clear() {
+    window.removeEventListener('resize', this.updateDimensions);
+    this.dom.remove();
+  }
+
+  static create(parentElem: HTMLDivElement, level: ILevel) {
+    const display = new DOMDisplay(parentElem, level);
+    // 
+    window.addEventListener('resize', () => {
+      // calling method inside anonymous function to maintain the value of 'this' for 'display'
+      display.updateDimensions();
+    });
+    return display;
+  }
+
+  /**
+   * Update the dimensions of the div containing the game
+   */
+  updateDimensions() {
+    this.domWidth = this.dom.clientWidth;
+    this.domHeight = this.dom.clientHeight;
+  }
 
   /**
    * Make the display show a given Actor state.
@@ -69,27 +96,28 @@ class DOMDisplay implements IDOMDisplay {
     // We change the scroll position by manipulating that element’s
     // scrollLeft and scrollTop properties when the player is too
     // close to the edge.
-    let width = this.dom.clientWidth;
-    let height = this.dom.clientHeight;
-    let margin = width / 3;
+    let margin = this.domWidth / 3;
 
     // The viewport
-    let left = this.dom.scrollLeft, right = left + width;
-    let top = this.dom.scrollTop, bottom = top + height;
+    let left = this.dom.scrollLeft;
+    let right = left + this.domWidth;
+    let top = this.dom.scrollTop;
+    let bottom = top + this.domHeight;
 
     let player = state.player;
+    // calculates the position of the center of the players rectangle
     let center = player.pos.plus(player.size.times(0.5)).times(scale);
 
     if (center.x < left + margin) {
       this.dom.scrollLeft = center.x - margin;
     } else if (center.x > right - margin) {
-      this.dom.scrollLeft = center.x + margin - width;
+      this.dom.scrollLeft = center.x + margin - this.domWidth;
     }
-
+    
     if (center.y < top + margin) {
       this.dom.scrollTop = center.y - margin;
     } else if (center.y > bottom - margin) {
-      this.dom.scrollTop = center.y + margin - height;
+      this.dom.scrollTop = center.y + margin - this.domHeight;
     }
   };
 }

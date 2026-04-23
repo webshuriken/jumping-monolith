@@ -16,6 +16,7 @@ These are the features or ideas to be implemented in due course.
 
 - [X] Move `Road Map` details to its own document called `ROADMAP.md`
 - [X] Play button has a zoom in and out effect. Improve loading so we can appreaciate it.
+- [X] Improve scroling that keeps player in the viewable area.
 - [ ] Tests for level MAPS, only the valid strings are used to create it
 - [ ] Add option to quit game using the `q` or `esc` character with a modal asking to confirm action
 

@@ -1,7 +1,7 @@
 /**
  * Jumping Monolith - Game Utilities
  * created: 2026
- * updated: 05-04-2026
+ * updated: 23-04-2026
  * author: Carlos E Alford
  * utility: DOMDisplay, to maintain the browsers DOM
  */
@@ -104,10 +104,7 @@ class DOMDisplay implements IDOMDisplay {
     // calculates the position of the center of the players rectangle
     const center = player.pos.plus(player.size.times(0.5)).times(scale);
     
-    // console.log(`top: ${top} - bottom: ${bottom} - right: ${right} - left: ${left} - scrollLeft: ${this.dom.scrollLeft} - scrollRight: ${this.dom.scrollTop}`);
-    // console.log(`top: ${top} - bottom: ${bottom} - right: ${right} - left: ${left} - scrollLeft: ${this.dom.scrollLeft}`);
-    // console.log(center);
-    
+    // x-axis movements
     // the second check is the boundary so we stop updating the scroll when we have reach the left limit
     if (center.x < left + this.domMargin && left > 0) {
       // the extra minus 1 is so the boundary moves infront of the player not behind or leveled with it
@@ -117,15 +114,13 @@ class DOMDisplay implements IDOMDisplay {
       this.dom.scrollLeft = (center.x + this.domMargin) + 1 - this.domWidth;
     }
     
-    // if (this.dom.scrollTop !== 0) {
-      if (center.y < top + this.domMargin) {
-        this.dom.scrollTop = center.y - this.domMargin;
-        // console.log('PLAYER TOO HIGH');
-      } else if (center.y > bottom - this.domMargin) {
-        this.dom.scrollTop = center.y + this.domMargin - this.domHeight;
-        // console.log('PLAYER TOO LOW')
-      }
-    // }
+    // y-axis movements
+    // the and checks are for the boundaries of the scroll so we dont update when we reach the limit
+    if (center.y < top + this.domMargin && top > 0) {
+      this.dom.scrollTop = center.y - this.domMargin;
+    } else if (center.y > bottom - this.domMargin && bottom < this.dom.scrollHeight) {
+      this.dom.scrollTop = center.y + this.domMargin - this.domHeight;
+    }
   };
 }
 

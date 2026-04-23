@@ -95,26 +95,37 @@ class DOMDisplay implements IDOMDisplay {
    * @param {IState} state - current game state
    */
   scrollPlayerIntoView(state: IState): void {
-    let left = this.dom.scrollLeft;
-    let right = left + this.domWidth;
-    let top = this.dom.scrollTop;
-    let bottom = top + this.domHeight;
-
-    let player = state.player;
+    const left = this.dom.scrollLeft;
+    const right = left + this.domWidth;
+    const top = this.dom.scrollTop;
+    const bottom = top + this.domHeight;
+    
+    const player = state.player;
     // calculates the position of the center of the players rectangle
-    let center = player.pos.plus(player.size.times(0.5)).times(scale);
-
-    if (center.x < left + this.domMargin) {
-      this.dom.scrollLeft = center.x - this.domMargin;
-    } else if (center.x > right - this.domMargin) {
-      this.dom.scrollLeft = center.x + this.domMargin - this.domWidth;
+    const center = player.pos.plus(player.size.times(0.5)).times(scale);
+    
+    // console.log(`top: ${top} - bottom: ${bottom} - right: ${right} - left: ${left} - scrollLeft: ${this.dom.scrollLeft} - scrollRight: ${this.dom.scrollTop}`);
+    // console.log(`top: ${top} - bottom: ${bottom} - right: ${right} - left: ${left} - scrollLeft: ${this.dom.scrollLeft}`);
+    // console.log(center);
+    
+    // the second check is the boundary so we stop updating the scroll when we have reach the left limit
+    if (center.x < left + this.domMargin && left > 0) {
+      // the extra minus 1 is so the boundary moves infront of the player not behind or leveled with it
+      this.dom.scrollLeft = center.x - 1 - this.domMargin;
+    } else if (center.x > right - this.domMargin && right < this.dom.scrollWidth) {
+      // plus 1 is to keep the right boundary infront of player avoid repeated calls to scroll
+      this.dom.scrollLeft = (center.x + this.domMargin) + 1 - this.domWidth;
     }
     
-    if (center.y < top + this.domMargin) {
-      this.dom.scrollTop = center.y - this.domMargin;
-    } else if (center.y > bottom - this.domMargin) {
-      this.dom.scrollTop = center.y + this.domMargin - this.domHeight;
-    }
+    // if (this.dom.scrollTop !== 0) {
+      if (center.y < top + this.domMargin) {
+        this.dom.scrollTop = center.y - this.domMargin;
+        // console.log('PLAYER TOO HIGH');
+      } else if (center.y > bottom - this.domMargin) {
+        this.dom.scrollTop = center.y + this.domMargin - this.domHeight;
+        // console.log('PLAYER TOO LOW')
+      }
+    // }
   };
 }
 

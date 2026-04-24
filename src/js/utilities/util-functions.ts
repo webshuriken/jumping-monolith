@@ -19,8 +19,8 @@ export type TArrowKeys = typeof TrackedArrowKeys[number];
 export type TTrackKeys = Partial<Record<TArrowKeys, boolean>> & { unregister: () => void };
 
 // Level construction characters
-const LEVEL_CHARS = [".", "#", "+", "@", "o", "*"] as const;
-const LAVA_CHARS = ["=", "|", "v"] as const;
+export const LEVEL_CHARS = [".", "#", "+", "@", "o", "*"] as const;
+export const LAVA_CHARS = ["=", "|", "v"] as const;
 export type TLavaChars = typeof LAVA_CHARS[number];
 export type TLevelChars = typeof LEVEL_CHARS[number] | TLavaChars;
 

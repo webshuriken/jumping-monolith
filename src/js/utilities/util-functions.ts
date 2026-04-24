@@ -1,7 +1,7 @@
 /**
  * Jumping Monolith - Game Utilities
  * created: 2026
- * updated: 16-04-2026
+ * updated: 24-04-2026
  * author: Carlos E Alford
  */
 import { 
@@ -17,6 +17,12 @@ import { type IPlayer } from "../actors/player";
 export const TrackedArrowKeys = ["ArrowLeft", "ArrowRight", "ArrowUp"] as const;
 export type TArrowKeys = typeof TrackedArrowKeys[number];
 export type TTrackKeys = Partial<Record<TArrowKeys, boolean>> & { unregister: () => void };
+
+// Level construction characters
+const LEVEL_CHARS = [".", "#", "+", "@", "o", "*"] as const;
+const LAVA_CHARS = ["=", "|", "v"] as const;
+export type TLavaChars = typeof LAVA_CHARS[number];
+export type TLevelChars = typeof LEVEL_CHARS[number] | TLavaChars;
 
 // game scale used by drawGird(), drawActor(), DOMDisplay.scrollPlayerIntoView()
 const scale = 20;

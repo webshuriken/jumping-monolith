@@ -237,7 +237,8 @@ main {
 }
 
 /*Win or Loose*/
-.lost .player {
+.lost .player,
+.quit .player {
   background: rgb(var(--c-player-dead));
 }
 

@@ -309,6 +309,10 @@ main {
   margin: 28px 0;
 }
 
+.howToModal-list li {
+  padding: .6rem 0;
+}
+
 .howto-legend {
   display: inline-block;
   height: 20px;

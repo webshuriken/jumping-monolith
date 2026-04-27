@@ -22,7 +22,7 @@ These are the features or ideas to be implemented in due course.
   - [X] Check the `map` property is not empty
   - [X] Check we have only a single player `@` spawn. If none or more than one exists then it gives error.
   - [X] Checks that we have at least a single coin `o`.
-- [ ] Add option to quit game using the `q` or `esc` character with a modal asking to confirm action
+- [X] Add option to quit game using the `q` or `esc` character with a modal asking to confirm action
 - [X] Improve the `How to Play` semantics by using a list to structure the modal layout
 - [X] Add quit options to `How to Play` modal
 - [X] Add missing `p` pause option to `How to Play` modal

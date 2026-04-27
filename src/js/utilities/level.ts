@@ -1,7 +1,7 @@
 /**
  * Jumping Monolith - Game Utilities
  * created: 2026
- * updated: 14-04-2026
+ * updated: 24-04-2026
  * author: Carlos E Alford
  * utility: Level, tracks the game level
  */
@@ -9,14 +9,14 @@
 import { Player } from "../actors/player";
 import { Enemy } from "../actors/enemy";
 import { Coin } from "../actors/coin";
-import { Lava, type TLavaChars } from "../actors/lava";
+import { Lava } from "../actors/lava";
 import { Vector, type IVector } from "./vector";
+import { type TLevelChars, type TLavaChars } from '../utilities/util-functions';
 
 
 type TActors = typeof Player | typeof Enemy | typeof Coin | typeof Lava;
 export type TActorInstances = Player | Enemy | Coin | Lava;
 // strings that describe a level
-type TLevelChars = "."| "#"| "+"| "@" | "o" | "*" | TLavaChars;
 type TLevelCharsToValues = "empty" | "wall" | "lava" | TActors;
 
 export interface ILevel {

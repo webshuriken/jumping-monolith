@@ -1,15 +1,14 @@
 /**
  * Jumping Monolith - Lava Class
  * created: 2026
- * updated: 05-04-2026
+ * updated: 24-04-2026
  * author: Carlos E Alford
  */
 
 import { Vector, type IVector } from "../utilities/vector";
 import { State, type IState } from "../utilities/state";
+import { type TLavaChars } from '../utilities/util-functions';
 
-
-export type TLavaChars = "=" | "|" | "v";
 
 export interface ILava {
   collide(state: IState): IState;

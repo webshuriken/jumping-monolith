@@ -6,7 +6,8 @@
  */
 
 import { Vector, type IVector } from "../utilities/vector";
-import { type IState, type TTrackKeys } from "../utilities/state";
+import { type IState } from "../utilities/state";
+import { type TTrackKeys } from "../utilities/util-functions";
 
 
 export interface IPlayer {

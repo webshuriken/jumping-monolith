@@ -25,7 +25,7 @@ export type TLavaChars = typeof LAVA_CHARS[number];
 export type TLevelChars = typeof LEVEL_CHARS[number] | TLavaChars;
 
 // game scale used by drawGird(), drawActor(), DOMDisplay.scrollPlayerIntoView()
-const scale = 20;
+export const scale = 20;
 
 // ==========================
 // FUNCTIONS
@@ -41,7 +41,7 @@ type TAttribute = {
  * @param {TActorInstances[]} actors - class of actors
  * @return {HTMLDivElement}
  */
-function drawActors(actors: TActorInstances[]): HTMLDivElement {
+export function drawActors(actors: TActorInstances[]): HTMLDivElement {
   return elt("div", {}, ...actors.map(actor => {
     let rect = elt("div", {class: `actor ${actor.type}`});
 
@@ -62,7 +62,7 @@ function drawActors(actors: TActorInstances[]): HTMLDivElement {
  * @param {ILevel} level - current game level map
  * @return {HTMLTableElement}
  */
-function drawGrid(level: ILevel): HTMLTableElement {
+export function drawGrid(level: ILevel): HTMLTableElement {
   // Uing the <table> element to build current level background
   return elt("table", {
       class: "background",
@@ -81,7 +81,7 @@ function drawGrid(level: ILevel): HTMLTableElement {
  * @param {Node[]} children - child nodes
  * @return {object}
  */
-function elt<K extends keyof HTMLElementTagNameMap>(
+export function elt<K extends keyof HTMLElementTagNameMap>(
   name: K, 
   attrs: TAttribute, 
   ...children: Node[]
@@ -108,7 +108,7 @@ function elt<K extends keyof HTMLElementTagNameMap>(
  * @param {TActor} actor2 - player instace
  * @return {boolean}
  */
-function overlap(actor1: Exclude<TActorInstances, IPlayer>, actor2: Extract<TActorInstances, IPlayer>): boolean {
+export function overlap(actor1: Exclude<TActorInstances, IPlayer>, actor2: Extract<TActorInstances, IPlayer>): boolean {
   // did the player kill the enemy on collision
   if (actor1.type === 'enemy') {
     // player must land on top of the enemy to kill them
@@ -134,7 +134,7 @@ function overlap(actor1: Exclude<TActorInstances, IPlayer>, actor2: Extract<TAct
  * @param {typeof TrackedArrowKeys} keys - string array of 3 possible keys
  * @return {TTrackKeys}
  */
-function trackKeys(keys: typeof TrackedArrowKeys): TTrackKeys {
+export function trackKeys(keys: typeof TrackedArrowKeys): TTrackKeys {
   // their effects are active as long as the key is held down
   const activeKeys: TTrackKeys = Object.create(null);
 
@@ -160,5 +160,3 @@ function trackKeys(keys: typeof TrackedArrowKeys): TTrackKeys {
   }
   return activeKeys;
 }
-
-export { drawActors, drawGrid, elt, overlap, trackKeys, scale };

@@ -17,7 +17,7 @@ import {
 import { type IPlayer } from '../actors/player';
 
 
-export type TGameStatus = 'playing' | 'won' | 'lost';
+export type TGameStatus = 'playing' | 'won' | 'lost' | 'quit';
 export interface IState {
   actors: TActorInstances[];
   level: ILevel;

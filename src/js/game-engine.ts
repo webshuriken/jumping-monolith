@@ -21,7 +21,7 @@ import {
 } from './utilities/level';
 
 // Types
-type TGameResult = 'won' | 'lost';
+type TGameResult = 'won' | 'lost' | 'quit';
 type TGameRunning = 'yes' | 'no' | 'pausing';
 
 // ==========================
@@ -65,7 +65,7 @@ function runLevel(
   gameWrapper: HTMLDivElement
 ): Promise<TGameResult> {
   // lets get the DOM for the level ready
-  const display = new Display(gameWrapper, level);
+  const display = Display.create(gameWrapper, level);
   // create a new state with current level, whatever level it may be
   let state = State.start(level);
   let ending = 1;
@@ -74,27 +74,37 @@ function runLevel(
 
   return new Promise(resolve => {
 
-    // check if game has been paused
-    function pauseHandler(event: KeyboardEvent) {
-      // ignore all keypress other than "p"
-      if (event.key.toLowerCase() !== 'p') return;
+    // checks for game pause or game quit
+    function gameOptionsHandler(event: KeyboardEvent) {
       event.preventDefault()
 
-      // swap between running states
-      switch (running) {
-        case "no":
-          running = 'yes';
-          // call to draw single game frame
-          runAnimation(drawSingleFrame);
-          break;
-        case "yes":
-          running = "pausing";
-          break;
+      // ignore all keypress except "p", "q" or "Escape"
+      const key = event.key.toLowerCase();
+      const quitOptions = ["q", "escape"];
+
+      // are we pauding the game
+      if (key === "p") {
+        // swap between running states
+        switch (running) {
+          case "no":
+            running = 'yes';
+            // call to draw single game frame
+            runAnimation(drawSingleFrame);
+            break;
+          case "yes":
+            running = "pausing";
+            break;
+        }
+      }
+
+      // are we quitting the game
+      if (quitOptions.includes(key)) {
+        state.status = "quit";
       }
     }
 
-    // Add event handler to listen for game pause
-    window.addEventListener('keydown', pauseHandler);
+    // listens for game pause 'p' or game quit 'q'
+    window.addEventListener('keydown', gameOptionsHandler);
 
     // name for the keys we will track during the game
     const arrowKeys = trackKeys(TrackedArrowKeys);
@@ -107,7 +117,6 @@ function runLevel(
     function drawSingleFrame(time: number) {
       // is the player trying to pause the game
       if (running === 'pausing') {
-        console.log('OA')
         running = 'no';
         return false;
       }
@@ -131,7 +140,7 @@ function runLevel(
       } else {
         //Game ends or reloads, clear screen and remove events
         display.clear();
-        window.removeEventListener('keydown', pauseHandler);
+        window.removeEventListener('keydown', gameOptionsHandler);
         arrowKeys.unregister();
         resolve(state.status);
         return false;
@@ -169,6 +178,12 @@ async function runGame(
 
     // game round outcome
     won = await runLevel(new Level(plan), Display, gameWrapper);
+
+    // exit game on request
+    if (won === 'quit') {
+      lives = 0;
+      level = plans.length;
+    }
 
     // reset lives, load new level or end game if no further levels available
     if (won == 'won') {

@@ -1,7 +1,7 @@
 /**
  * Jumping Monolith - Game Utilities
  * created: 2026
- * updated: 05-04-2026
+ * updated: 23-04-2026
  * author: Carlos E Alford
  * utility: DOMDisplay, to maintain the browsers DOM
  */
@@ -25,21 +25,50 @@ interface IDOMDisplay {
 }
 
 /**
- * @description Displays a given level and state.
+ * @description Displays a given level and state. Initialise using the 'create' method.
  * @param {object} parent - element to append game grid to
  * @param {object} level - current level map
  */
 class DOMDisplay implements IDOMDisplay {
   readonly dom: HTMLDivElement;
   actorLayer: HTMLDivElement | null;
+  private domWidth: number = 0;
+  private domHeight: number = 0;
+  private domMargin: number = 0;
 
   constructor(parent: HTMLDivElement, level: ILevel) {
     this.dom = elt("div", {class: "game"}, drawGrid(level));
     parent.appendChild(this.dom);
     this.actorLayer = null;
+    this.updateDimensions();
   }
 
-  clear() { this.dom.remove(); }
+  /**
+   * Remove the html element from DOM and event listener
+   */
+  clear() {
+    window.removeEventListener('resize', this.updateDimensions);
+    this.dom.remove();
+  }
+
+  static create(parentElem: HTMLDivElement, level: ILevel) {
+    const display = new DOMDisplay(parentElem, level);
+    // 
+    window.addEventListener('resize', () => {
+      // calling method inside anonymous function to maintain the value of 'this' for 'display'
+      display.updateDimensions();
+    });
+    return display;
+  }
+
+  /**
+   * Update the dimensions of the div containing the game
+   */
+  updateDimensions() {
+    this.domWidth = this.dom.clientWidth;
+    this.domHeight = this.dom.clientHeight;
+    this.domMargin = this.domWidth / 3;
+  }
 
   /**
    * Make the display show a given Actor state.
@@ -62,34 +91,35 @@ class DOMDisplay implements IDOMDisplay {
   };
 
   /**
-   * Keep the player within the center of the screen or there abouts
+   * Manipulate the div elements scroll position to keep the player centered
    * @param {IState} state - current game state
    */
   scrollPlayerIntoView(state: IState): void {
-    // We change the scroll position by manipulating that element’s
-    // scrollLeft and scrollTop properties when the player is too
-    // close to the edge.
-    let width = this.dom.clientWidth;
-    let height = this.dom.clientHeight;
-    let margin = width / 3;
-
-    // The viewport
-    let left = this.dom.scrollLeft, right = left + width;
-    let top = this.dom.scrollTop, bottom = top + height;
-
-    let player = state.player;
-    let center = player.pos.plus(player.size.times(0.5)).times(scale);
-
-    if (center.x < left + margin) {
-      this.dom.scrollLeft = center.x - margin;
-    } else if (center.x > right - margin) {
-      this.dom.scrollLeft = center.x + margin - width;
+    const left = this.dom.scrollLeft;
+    const right = left + this.domWidth;
+    const top = this.dom.scrollTop;
+    const bottom = top + this.domHeight;
+    
+    const player = state.player;
+    // calculates the position of the center of the players rectangle
+    const center = player.pos.plus(player.size.times(0.5)).times(scale);
+    
+    // x-axis movements
+    // the second check is the boundary so we stop updating the scroll when we have reach the left limit
+    if (center.x < left + this.domMargin && left > 0) {
+      // the extra minus 1 is so the boundary moves infront of the player not behind or leveled with it
+      this.dom.scrollLeft = center.x - 1 - this.domMargin;
+    } else if (center.x > right - this.domMargin && right < this.dom.scrollWidth) {
+      // plus 1 is to keep the right boundary infront of player avoid repeated calls to scroll
+      this.dom.scrollLeft = (center.x + this.domMargin) + 1 - this.domWidth;
     }
-
-    if (center.y < top + margin) {
-      this.dom.scrollTop = center.y - margin;
-    } else if (center.y > bottom - margin) {
-      this.dom.scrollTop = center.y + margin - height;
+    
+    // y-axis movements
+    // the and checks are for the boundaries of the scroll so we dont update when we reach the limit
+    if (center.y < top + this.domMargin && top > 0) {
+      this.dom.scrollTop = center.y - this.domMargin;
+    } else if (center.y > bottom - this.domMargin && bottom < this.dom.scrollHeight) {
+      this.dom.scrollTop = center.y + this.domMargin - this.domHeight;
     }
   };
 }

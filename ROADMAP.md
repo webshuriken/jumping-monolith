@@ -23,6 +23,9 @@ These are the features or ideas to be implemented in due course.
   - [X] Check we have only a single player `@` spawn. If none or more than one exists then it gives error.
   - [X] Checks that we have at least a single coin `o`.
 - [ ] Add option to quit game using the `q` or `esc` character with a modal asking to confirm action
+- [X] Improve the `How to Play` semantics by using a list to structure the modal layout
+- [ ] Add quit options to `How to Play` modal
+- [ ] Add missing `p` pause option to `How to Play` modal
 
 ## Version 1.2.0
 

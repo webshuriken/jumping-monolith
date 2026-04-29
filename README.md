@@ -33,8 +33,6 @@ Because we use `ES6` modules and due to CORS policy the game can't be run direct
 
 ## Screenshot
 
-![screenshot of landing page with play button](screenshot-home.png)
-
 ![screenshot of game play](screenshot-game.png)
 
 ## Game Features

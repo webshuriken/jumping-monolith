@@ -31,7 +31,7 @@ interface IDOMDisplay {
  */
 class DOMDisplay implements IDOMDisplay {
   readonly dom: HTMLDivElement;
-  actorLayer: HTMLDivElement | null;
+  actorLayer: HTMLDivElement | null = null;
   private domWidth: number = 0;
   private domHeight: number = 0;
   private domMargin: number = 0;
@@ -39,7 +39,6 @@ class DOMDisplay implements IDOMDisplay {
   constructor(parent: HTMLDivElement, level: ILevel) {
     this.dom = elt("div", {class: "game"}, drawGrid(level));
     parent.appendChild(this.dom);
-    this.actorLayer = null;
     this.updateDimensions();
   }
 

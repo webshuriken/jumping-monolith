@@ -29,13 +29,12 @@ class Enemy implements IEnemy {
   // enemy same size as player
   readonly size = new Vector(1.2, 1.4);
   reset?: IVector;
-  alive: boolean;
+  alive: boolean = true;
 
   constructor(public pos: IVector, public speed: IVector, reset?: IVector) {
     if (reset) {
       this.reset = reset;
     }
-    this.alive = true;
   }
 
   // return player type
